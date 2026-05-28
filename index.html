@@ -3,553 +3,555 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OverExpansion — Find Your Best Bank</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<title>OverExpansion — Bank Bonuses & Rates</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --green:#1a9e6e;--green-dark:#0e7a53;--green-light:#e6f7f1;
-  --navy:#0f1f2e;--slate:#2c3e50;--gray:#64748b;
-  --border:#e2e8f0;--bg:#f8fafc;--white:#ffffff;
-}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--navy);font-size:15px}
-nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:100}
-.logo{font-family:'DM Serif Display',serif;font-size:22px}.logo span{color:var(--green)}
-.nav-links{display:flex;gap:4px}
-.nav-btn{padding:7px 16px;border-radius:8px;border:none;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--gray);transition:all .15s}
-.nav-btn:hover{background:var(--bg);color:var(--navy)}
-.nav-btn.active{background:var(--green-light);color:var(--green-dark);font-weight:500}
-.hero{background:var(--white);border-bottom:1px solid var(--border);padding:40px 32px 32px}
-.hero h1{font-family:'DM Serif Display',serif;font-size:32px;margin-bottom:8px}
-.hero p{color:var(--gray);font-size:15px;margin-bottom:24px}
-.search-wrap{display:flex;gap:10px;max-width:680px}
-.search-wrap input{flex:1;padding:11px 16px;border:1px solid var(--border);border-radius:10px;font-size:14px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--navy);outline:none;transition:border-color .15s}
-.search-wrap input:focus{border-color:var(--green);background:var(--white)}
-.btn{padding:11px 20px;border-radius:10px;border:none;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all .15s}
-.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:var(--green-dark)}
-.btn-outline{background:var(--white);border:1px solid var(--border);color:var(--navy)}
-.btn-outline:hover{border-color:var(--green);color:var(--green)}
-.btn-sm{padding:7px 14px;font-size:13px;border-radius:8px}
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:20px 32px;background:var(--white);border-bottom:1px solid var(--border)}
-.stat-box{background:var(--bg);border-radius:10px;padding:13px 16px}
-.stat-label{font-size:11px;color:var(--gray);margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em;font-weight:500}
-.stat-val{font-size:20px;font-weight:600}.stat-val.green{color:var(--green-dark)}
-.stat-note{font-size:10px;color:var(--gray);margin-top:2px}
-main{max-width:1140px;margin:0 auto;padding:28px 32px}
-.page{display:none}.page.active{display:block}
-.section-title{font-size:17px;font-weight:600;color:var(--navy)}
-.filters{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;align-items:center}
-.filter-pill{padding:6px 16px;border-radius:20px;border:1px solid var(--border);background:var(--white);font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--gray);transition:all .15s}
-.filter-pill:hover{border-color:var(--green);color:var(--green)}
-.filter-pill.active{background:var(--green-light);border-color:var(--green);color:var(--green-dark);font-weight:500}
-.type-toggle{display:flex;gap:6px;margin-left:auto}
-.type-btn{padding:5px 12px;border-radius:6px;border:1px solid var(--border);background:var(--white);font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--gray)}
-.type-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
-.table-wrap{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:20px}
-.table-head{display:grid;grid-template-columns:2.4fr .9fr 1fr 1fr .8fr 110px;background:var(--bg);border-bottom:1px solid var(--border)}
-.table-head div{padding:10px 14px;font-size:11px;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:.06em}
-.table-row{display:grid;grid-template-columns:2.4fr .9fr 1fr 1fr .8fr 110px;border-bottom:1px solid var(--border);align-items:center;transition:background .1s}
-.table-row:last-child{border-bottom:none}
-.table-row:hover{background:#fafcff}
-.table-row>div{padding:10px 14px}
-.bank-name{font-weight:600;font-size:14px}
-.bank-meta{font-size:11px;color:var(--gray);margin-top:3px;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
-.apy{font-size:15px;font-weight:600;color:var(--green-dark)}
-.apy-na{font-size:12px;color:#cbd5e1}
-.apy-cond{font-size:10px;color:var(--gray);margin-top:1px}
-.apy-live{font-size:10px;color:var(--green-dark);font-weight:500}
-.apy-stale{font-size:10px;color:#f59e0b}
-.stars{color:#f59e0b;font-size:11px}
-.rating-num{font-size:11px;color:var(--gray);margin-top:1px}
-.badge{display:inline-block;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:.02em}
-.b-top{background:#dbeafe;color:#1d4ed8}
-.b-promo{background:#fef3c7;color:#92400e}
-.b-fdic{background:var(--green-light);color:var(--green-dark)}
-.b-type{background:#f1f5f9;color:#475569}
-.b-ncua{background:#f3e8ff;color:#6b21a8}
-.detail-btn{padding:5px 13px;border-radius:8px;border:1px solid var(--green);background:transparent;color:var(--green);font-size:12px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;transition:all .15s}
-.detail-btn:hover{background:var(--green-light)}
-.no-results{padding:40px;text-align:center;color:var(--gray);line-height:2}
-.live-banner{background:var(--green-light);border:1px solid #9ae6cc;border-radius:10px;padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px;font-size:13px;color:var(--green-dark)}
-.live-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0}
-.stale-banner{background:#fef9c3;border:1px solid #fde047;border-radius:10px;padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px;font-size:13px;color:#854d0e}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.loading-overlay{padding:40px;text-align:center;color:var(--gray)}
-.spinner{width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 12px}
-@keyframes spin{to{transform:rotate(360deg)}}
-.bank-select-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:20px}
-.bcard{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:13px;cursor:pointer;transition:all .15s}
-.bcard:hover{border-color:var(--green);box-shadow:0 4px 12px rgba(0,0,0,.07)}
-.bcard.sel{border:2px solid var(--green);background:var(--green-light)}
-.bcard-logo{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;margin-bottom:9px}
-.bcard-name{font-size:12px;font-weight:600;margin-bottom:4px;line-height:1.3}
-.bcard-apy{font-size:15px;font-weight:700;color:var(--green-dark)}
-.bcard-lbl{font-size:10px;color:var(--gray)}
-.comp-hint{font-size:13px;color:var(--gray);margin-bottom:14px}
-.comp-table-wrap{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:14px}
-.comp-head{display:flex;background:var(--bg);border-bottom:1px solid var(--border)}
-.comp-head-cell{flex:1;padding:10px 14px;font-size:13px;font-weight:600}
-.comp-head-cell:first-child{flex:0 0 150px;font-size:10px;color:var(--gray);text-transform:uppercase;letter-spacing:.05em;font-weight:600}
-.comp-row{display:flex;border-bottom:1px solid var(--border)}
-.comp-row:last-child{border-bottom:none}
-.comp-cell{flex:1;padding:9px 14px;font-size:13px}
-.comp-cell:first-child{flex:0 0 150px;font-size:12px;color:var(--gray)}
-.comp-best{color:var(--green-dark);font-weight:600}
-.review-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
-.rev-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:18px;transition:outline .1s}
-.rev-card.highlight{outline:2px solid var(--green)}
-.rev-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-.rev-logo{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0}
-.rev-name{font-size:15px;font-weight:600}
-.rev-stars{font-size:12px;color:var(--gray);margin-top:2px}
-.rev-apy{font-size:13px;font-weight:600;color:var(--green-dark);margin-bottom:8px}
-.rev-text{font-size:13px;color:var(--gray);line-height:1.65;margin-bottom:12px}
-.rev-feat{font-size:12px;color:var(--slate);display:flex;align-items:flex-start;gap:6px;margin-bottom:4px}
-.rev-feat::before{content:'✓';color:var(--green);font-weight:700;font-size:11px;margin-top:1px;flex-shrink:0}
-.ai-wrap{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-.ai-top{background:linear-gradient(135deg,#0f1f2e 0%,#1a3a5c 100%);padding:20px 24px;display:flex;align-items:flex-start;gap:14px}
-.ai-dot{width:10px;height:10px;border-radius:50%;background:var(--green);flex-shrink:0;margin-top:5px;animation:pulse 2s infinite}
-.ai-top h2{color:#fff;font-size:17px;font-weight:500;margin-bottom:3px}
-.ai-top p{color:rgba(255,255,255,.55);font-size:13px}
-.ai-body{padding:20px 24px}
-.ai-input-row{display:flex;gap:10px;margin-bottom:14px}
-.ai-input-row input{flex:1;padding:11px 16px;border:1px solid var(--border);border-radius:10px;font-size:14px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--navy);outline:none}
-.ai-input-row input:focus{border-color:var(--green);background:var(--white)}
-.quick-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.quick-btn{padding:7px 13px;border-radius:20px;border:1px solid var(--border);background:var(--white);font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--gray);transition:all .15s}
-.quick-btn:hover{border-color:var(--green);color:var(--green-dark)}
-.ai-response{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:16px 18px;font-size:14px;line-height:1.8;color:var(--navy);min-height:80px;white-space:pre-wrap}
-.ai-response.muted{color:var(--gray);font-style:italic}
-.disclaimer{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px 16px;font-size:12px;color:var(--gray);line-height:1.6;margin-top:20px}
+body{font-family:'Inter',sans-serif;background:#f5f6fa;color:#111;font-size:14px}
+
+/* nav */
+nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{font-size:17px;font-weight:700;letter-spacing:-.3px}.logo em{color:#16a34a;font-style:normal}
+.tabs{display:flex;gap:2px}
+.tab{padding:6px 14px;border-radius:6px;border:none;background:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:#6b7280}
+.tab:hover{background:#f3f4f6;color:#111}
+.tab.on{background:#16a34a;color:#fff}
+
+/* page */
+.page{display:none}.page.on{display:block}
+main{max-width:1080px;margin:0 auto;padding:24px 20px}
+
+/* search / filter bar */
+.top-bar{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;align-items:center}
+.search-input{flex:1;min-width:200px;padding:9px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;outline:none;background:#fff}
+.search-input:focus{border-color:#16a34a}
+.filter-pills{display:flex;gap:6px;flex-wrap:wrap}
+.pill{padding:6px 14px;border-radius:20px;border:1px solid #d1d5db;background:#fff;font-size:12px;font-weight:500;cursor:pointer;color:#374151;font-family:'Inter',sans-serif}
+.pill:hover{border-color:#16a34a;color:#16a34a}
+.pill.on{background:#16a34a;border-color:#16a34a;color:#fff}
+select.filter-sel{padding:7px 12px;border:1px solid #d1d5db;border-radius:8px;font-size:13px;font-family:'Inter',sans-serif;background:#fff;cursor:pointer;outline:none}
+
+/* card grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+
+/* offer card */
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;transition:box-shadow .15s}
+.card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.card-head{padding:16px;display:flex;align-items:center;gap:12px}
+.logo-wrap{width:42px;height:42px;border-radius:9px;border:1px solid #e5e7eb;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:4px;flex-shrink:0}
+.logo-wrap img{width:32px;height:32px;object-fit:contain}
+.logo-fb{width:42px;height:42px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
+.card-title{font-weight:600;font-size:14px;margin-bottom:2px}
+.card-sub{font-size:11px;color:#6b7280}
+.card-amount{font-size:22px;font-weight:700;margin-left:auto;white-space:nowrap}
+.card-amount.green{color:#16a34a}
+.card-amount.blue{color:#2563eb}
+.card-amount small{font-size:11px;font-weight:500;color:#6b7280;display:block;text-align:right}
+
+.card-tags{padding:0 16px 10px;display:flex;gap:6px;flex-wrap:wrap}
+.tag{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:500}
+.t-green{background:#dcfce7;color:#166534}
+.t-amber{background:#fef3c7;color:#92400e}
+.t-red{background:#fee2e2;color:#991b1b}
+.t-blue{background:#dbeafe;color:#1e40af}
+.t-gray{background:#f3f4f6;color:#374151}
+
+.card-req{padding:0 16px 12px;font-size:12px;color:#4b5563;line-height:1.55}
+.card-req strong{color:#111}
+
+.card-foot{padding:10px 16px;background:#f9fafb;border-top:1px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between}
+.card-foot-label{font-size:11px;color:#6b7280}
+.card-foot-label strong{color:#16a34a}
+
+/* rate table */
+.rate-table{background:#fff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden}
+.rt-head{display:grid;grid-template-columns:2.2fr .9fr .95fr .9fr .75fr 96px;background:#f9fafb;border-bottom:1px solid #e5e7eb}
+.rt-head div,.rt-row>div{padding:10px 14px}
+.rt-head div{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#6b7280}
+.rt-row{display:grid;grid-template-columns:2.2fr .9fr .95fr .9fr .75fr 96px;border-bottom:1px solid #f0f0f0;align-items:center}
+.rt-row:last-child{border-bottom:none}
+.rt-row:hover{background:#fafbff}
+.rt-bank{display:flex;align-items:center;gap:10px}
+.rt-logo{width:28px;height:28px;border-radius:6px;border:1px solid #e5e7eb;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:2px;flex-shrink:0}
+.rt-logo img{width:20px;height:20px;object-fit:contain}
+.rt-name{font-weight:600;font-size:13px}
+.rt-meta{font-size:10px;color:#6b7280;margin-top:1px;display:flex;gap:4px}
+.rt-apy{font-size:15px;font-weight:700;color:#16a34a}
+.rt-apy-top{color:#14532d}
+.rt-cond{font-size:9px;color:#6b7280;margin-top:1px}
+.rt-na{font-size:12px;color:#d1d5db}
+.rt-fee-free{font-size:12px;font-weight:600;color:#16a34a}
+.rt-fee{font-size:12px;color:#4b5563}
+.rt-stars{color:#f59e0b;font-size:11px}
+.rt-rating{font-size:10px;color:#6b7280;margin-top:1px}
+.view-btn{padding:5px 12px;border-radius:7px;border:1px solid #d1d5db;background:#fff;font-size:11px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;color:#374151}
+.view-btn:hover{border-color:#16a34a;color:#16a34a}
+
+/* ai */
+.ai-box{background:#fff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden}
+.ai-head{background:#111;padding:16px 20px;display:flex;align-items:center;gap:10px}
+.ai-head h2{font-size:14px;font-weight:600;color:#fff}
+.ai-head p{font-size:12px;color:rgba(255,255,255,.4);margin-top:2px}
+.ai-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;flex-shrink:0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.ai-body{padding:16px 20px}
+.ai-row{display:flex;gap:8px;margin-bottom:10px}
+.ai-in{flex:1;padding:9px 13px;border:1px solid #d1d5db;border-radius:8px;font-size:13px;font-family:'Inter',sans-serif;outline:none;background:#fff}
+.ai-in:focus{border-color:#16a34a}
+.ai-suggestions{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.sug{padding:5px 11px;border-radius:20px;border:1px solid #e5e7eb;background:#f9fafb;font-size:11px;font-weight:500;cursor:pointer;color:#374151;font-family:'Inter',sans-serif}
+.sug:hover{border-color:#16a34a;color:#16a34a}
+.ai-out{background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:13px 15px;font-size:13px;line-height:1.75;color:#111;min-height:72px;white-space:pre-wrap}
+.ai-out.dim{color:#9ca3af;font-style:italic}
+
+/* misc */
+.disc{font-size:11px;color:#9ca3af;margin-top:20px;line-height:1.6;padding:12px 14px;background:#fff;border:1px solid #e5e7eb;border-radius:8px}
+.no-results{padding:40px;text-align:center;color:#9ca3af;font-size:13px}
+.count-label{font-size:12px;color:#6b7280;margin-bottom:12px}
+.banner{padding:9px 14px;border-radius:8px;font-size:12px;margin-bottom:14px;border:1px solid}
+.banner-info{background:#eff6ff;border-color:#bfdbfe;color:#1e40af}
+.banner-warn{background:#fefce8;border-color:#fde68a;color:#92400e}
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="logo">Over<span>Expansion</span></div>
-  <div class="nav-links">
-    <button class="nav-btn active" onclick="showPage('rates',this)">Rates</button>
-    <button class="nav-btn" onclick="showPage('compare',this)">Compare</button>
-    <button class="nav-btn" onclick="showPage('reviews',this)">Reviews</button>
-    <button class="nav-btn" onclick="showPage('ai',this)">AI Advisor</button>
+  <div class="logo">Over<em>Expansion</em></div>
+  <div class="tabs">
+    <button class="tab on"  onclick="goTab('bonuses',this)">Bonuses</button>
+    <button class="tab"     onclick="goTab('rates',this)">Rates</button>
+    <button class="tab"     onclick="goTab('ai',this)">AI Advisor</button>
   </div>
 </nav>
 
-<div class="hero">
-  <h1>Find your perfect bank match</h1>
-  <p id="heroSub">Loading live rates...</p>
-  <div class="search-wrap">
-    <input type="text" id="searchInput" placeholder="Search any bank (Chase, Ally, Varo, Axos, Marcus...)" oninput="renderRates()">
-    <button class="btn btn-green" onclick="renderRates()">Search</button>
-    <button class="btn btn-outline" onclick="showPage('compare',document.querySelectorAll('.nav-btn')[1])">Compare Banks</button>
-  </div>
-</div>
-
-<div class="stats-row">
-  <div class="stat-box">
-    <div class="stat-label">Top savings APY</div>
-    <div class="stat-val green" id="statTopSavings">—</div>
-    <div class="stat-note" id="statTopSavingsNote">loading...</div>
-  </div>
-  <div class="stat-box">
-    <div class="stat-label">Natl avg savings APY</div>
-    <div class="stat-val" id="statNatlAvg">—</div>
-    <div class="stat-note" id="statNatlNote">FDIC national avg</div>
-  </div>
-  <div class="stat-box">
-    <div class="stat-label">Top CD APY (1-yr)</div>
-    <div class="stat-val green" id="statTopCD">—</div>
-    <div class="stat-note" id="statTopCDNote">loading...</div>
-  </div>
-  <div class="stat-box">
-    <div class="stat-label">Rates last updated</div>
-    <div class="stat-val" id="statUpdated" style="font-size:14px">—</div>
-    <div class="stat-note" id="statUpdatedNote">auto-refresh daily</div>
-  </div>
-</div>
-
 <main>
-  <!-- RATES -->
-  <div id="page-rates" class="page active">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
-      <div class="section-title">Bank rates</div>
-      <div id="liveBadge"></div>
-    </div>
-    <div id="rateBanner"></div>
-    <div class="filters">
-      <button class="filter-pill active" onclick="setFilter('savings',this)">Savings</button>
-      <button class="filter-pill" onclick="setFilter('cd',this)">CDs (1-yr)</button>
-      <button class="filter-pill" onclick="setFilter('checking',this)">Checking</button>
-      <button class="filter-pill" onclick="setFilter('mma',this)">Money Market</button>
-      <div class="type-toggle">
-        <button class="type-btn active" onclick="setType('all',this)">All</button>
-        <button class="type-btn" onclick="setType('online',this)">Online</button>
-        <button class="type-btn" onclick="setType('traditional',this)">Traditional</button>
-      </div>
-    </div>
-    <div class="table-wrap">
-      <div class="table-head">
-        <div>Bank</div><div>APY</div><div>Min. balance</div><div>Monthly fee</div><div>Rating</div><div></div>
-      </div>
-      <div id="ratesBody"><div class="loading-overlay"><div class="spinner"></div>Loading rates...</div></div>
-    </div>
-    <div class="disclaimer">
-      <strong>Disclaimer:</strong> OverExpansion is not a bank or financial advisor. Live rates are fetched automatically from each bank's public website and from FDIC data, but may lag by up to 24 hours. Always verify current rates directly with the financial institution before opening an account. All institutions are FDIC or NCUA insured up to $250,000.
-    </div>
-  </div>
 
-  <!-- COMPARE -->
-  <div id="page-compare" class="page">
-    <div class="section-title" style="margin-bottom:6px">Compare banks side by side</div>
-    <div class="comp-hint">Select up to 3 banks to compare rates and features.</div>
-    <div class="bank-select-grid" id="compareGrid"></div>
-    <div id="comparisonTable"></div>
+<!-- BONUSES -->
+<div id="page-bonuses" class="page on">
+  <div class="top-bar">
+    <input class="search-input" id="bonusSearch" placeholder="Search banks..." oninput="renderBonuses()">
+    <div class="filter-pills">
+      <button class="pill on" onclick="setBF('type','all',this)">All</button>
+      <button class="pill"    onclick="setBF('type','checking',this)">Checking</button>
+      <button class="pill"    onclick="setBF('type','savings',this)">Savings</button>
+      <button class="pill"    onclick="toggleBFF('no_dd',this)">No direct deposit</button>
+      <button class="pill"    onclick="toggleBFF('no_cc',this)">No credit check</button>
+    </div>
+    <select class="filter-sel" id="bonusSort" onchange="renderBonuses()">
+      <option value="highest">Highest bonus</option>
+      <option value="easiest">Easiest first</option>
+      <option value="expiring">Expiring soon</option>
+    </select>
   </div>
+  <div id="bonusCount" class="count-label"></div>
+  <div id="bonusGrid" class="grid"></div>
+  <div class="disc"><strong>Disclosure:</strong> Bonus offers and requirements change frequently — always verify the current offer directly with the bank before applying. Sign-up bonuses are generally taxable as ordinary income and will be reported on a 1099-INT or 1099-MISC. OverExpansion may earn a referral commission if you open an account through our links.</div>
+</div>
 
-  <!-- REVIEWS -->
-  <div id="page-reviews" class="page">
-    <div class="section-title" style="margin-bottom:16px">Bank reviews</div>
-    <div class="review-grid" id="reviewGrid"></div>
-  </div>
-
-  <!-- AI -->
-  <div id="page-ai" class="page">
-    <div class="ai-wrap">
-      <div class="ai-top">
-        <div class="ai-dot"></div>
-        <div>
-          <h2>AI Bank Advisor</h2>
-          <p>Ask anything — I'll analyze your options using the latest scraped rate data</p>
-        </div>
-      </div>
-      <div class="ai-body">
-        <div class="ai-input-row">
-          <input type="text" id="aiInput" placeholder="e.g. Which bank has the best savings rate with no fees?" onkeydown="if(event.key==='Enter')askAI()">
-          <button class="btn btn-green" onclick="askAI()">Ask →</button>
-        </div>
-        <div class="quick-btns">
-          <button class="quick-btn" onclick="sq('Which bank has the highest savings APY right now with no conditions?')">Best unconditional APY?</button>
-          <button class="quick-btn" onclick="sq('Best bank with no monthly fees and no minimum balance?')">No fees + no minimum?</button>
-          <button class="quick-btn" onclick="sq('How does Bank of America compare to Ally Bank for savings?')">BofA vs Ally</button>
-          <button class="quick-btn" onclick="sq('Should I use a CD or high-yield savings account right now?')">CD vs savings?</button>
-          <button class="quick-btn" onclick="sq('What are the pros and cons of Chase Bank?')">Chase review</button>
-          <button class="quick-btn" onclick="sq('Best online bank for a student with no minimum balance?')">Best for students?</button>
-        </div>
-        <div class="ai-response muted" id="aiResponse">Ask a question above and I'll analyze the best banking options using the latest scraped rates.</div>
-      </div>
+<!-- RATES -->
+<div id="page-rates" class="page">
+  <div class="top-bar">
+    <input class="search-input" id="rateSearch" placeholder="Search banks..." oninput="renderRates()">
+    <div class="filter-pills">
+      <button class="pill on" onclick="setRF('savings',this)">Savings</button>
+      <button class="pill"    onclick="setRF('cd',this)">CDs (1-yr)</button>
+      <button class="pill"    onclick="setRF('checking',this)">Checking</button>
+      <button class="pill"    onclick="setRF('mma',this)">Money Market</button>
+    </div>
+    <div class="filter-pills">
+      <button class="pill on" onclick="setRT('all',this)">All banks</button>
+      <button class="pill"    onclick="setRT('online',this)">Online only</button>
+      <button class="pill"    onclick="setRT('traditional',this)">Branches</button>
     </div>
   </div>
+  <div id="ratesBanner"></div>
+  <div id="ratesCount" class="count-label"></div>
+  <div class="rate-table">
+    <div class="rt-head"><div>Bank</div><div>APY</div><div>Min. balance</div><div>Monthly fee</div><div>Rating</div><div></div></div>
+    <div id="ratesBody"></div>
+  </div>
+  <div class="disc"><strong>Disclaimer:</strong> OverExpansion is not a bank. Rates are verified as of May 2026 and updated daily where possible. Always confirm the current rate directly with the institution before opening an account. All listed institutions are FDIC or NCUA insured up to $250,000.</div>
+</div>
+
+<!-- AI -->
+<div id="page-ai" class="page">
+  <div class="ai-box">
+    <div class="ai-head">
+      <div class="ai-dot"></div>
+      <div><h2>AI Bank Advisor</h2><p>Ask anything about bonuses, rates, or requirements</p></div>
+    </div>
+    <div class="ai-body">
+      <div class="ai-row">
+        <input class="ai-in" id="aiIn" placeholder="e.g. What's the easiest $300+ bonus with no direct deposit?" onkeydown="if(event.key==='Enter')ask()">
+        <button class="tab on" style="border-radius:8px;padding:9px 16px" onclick="ask()">Ask →</button>
+      </div>
+      <div class="ai-suggestions">
+        <button class="sug" onclick="sq('Easiest bank bonus to get right now?')">Easiest bonus?</button>
+        <button class="sug" onclick="sq('Best savings APY with no conditions?')">Best APY, no conditions?</button>
+        <button class="sug" onclick="sq('Are bank bonuses taxable?')">Are bonuses taxable?</button>
+        <button class="sug" onclick="sq('Best bank for students with no fees?')">Best for students?</button>
+        <button class="sug" onclick="sq('Compare Ally vs Marcus for savings')">Ally vs Marcus?</button>
+        <button class="sug" onclick="sq('What is bank churning and is it worth it?')">What is churning?</button>
+      </div>
+      <div class="ai-out dim" id="aiOut">Ask a question and I'll give you a straight answer using current bonus and rate data.</div>
+    </div>
+  </div>
+</div>
+
 </main>
 
 <script>
-// ─── STATIC BANK METADATA ────────────────────────────────────────────────────
-// APY rates in this object are FALLBACK values only.
-// Live values are loaded from rates.json (written daily by scraper.py).
-const BANKS = [
-  {name:"Bank of America",short:"BofA",sub:"National bank",type:"traditional",insured:"FDIC",apy:{savings:0.01,cd:4.20,checking:0.01,mma:0.02},min:{savings:100,cd:1000,checking:25,mma:2500},fee:{savings:8,checking:12,mma:12},rating:3.8,badge:"top",logo:"BA",lc:"#1e40af",lt:"#dbeafe",features:["13,000+ ATMs nationwide","Preferred Rewards program","Zelle built-in","Mobile check deposit","Merrill investing integration"],review:"Bank of America is one of the largest US banks with an unmatched branch and ATM network. Savings rates are very low — 0.01% APY — compared to online banks, but the Preferred Rewards program and full-service banking make it America's second-largest bank by deposits."},
-  {name:"Chase Bank",short:"Chase",sub:"National bank",type:"traditional",insured:"FDIC",apy:{savings:0.01,cd:4.00,checking:0.01,mma:0.01},min:{savings:0,cd:1000,checking:0,mma:0},fee:{savings:5,checking:12,mma:12},rating:4.0,badge:"top",logo:"CH",lc:"#92400e",lt:"#fef3c7",features:["Largest US branch network","Sapphire & Freedom credit cards","Chase Ultimate Rewards","QuickPay with Zelle","Strong mobile app"],review:"Chase is the largest US bank by assets. Deposit rates are near zero, but the rewards ecosystem, branch presence, and mobile app make it America's most popular everyday bank. CDs available up to 4.00% APY."},
-  {name:"Wells Fargo",short:"Wells Fargo",sub:"National bank",type:"traditional",insured:"FDIC",apy:{savings:0.01,cd:3.75,checking:0.01,mma:0.01},min:{savings:25,cd:2500,checking:25,mma:25},fee:{savings:5,checking:10,mma:12},rating:3.5,badge:"fdic",logo:"WF",lc:"#991b1b",lt:"#fee2e2",features:["13,000+ ATMs","LifeSync financial tools","Overdraft protection","Business banking","Mortgage products"],review:"Wells Fargo has a wide ATM and branch network. Savings rates remain at 0.01% APY. Broad financial services suite for branch-dependent customers."},
-  {name:"Citibank",short:"Citi",sub:"National bank",type:"traditional",insured:"FDIC",apy:{savings:0.01,cd:4.10,checking:0.01,mma:0.04},min:{savings:0,cd:500,checking:0,mma:0},fee:{savings:4.5,checking:12,mma:10},rating:3.9,badge:"fdic",logo:"CI",lc:"#0369a1",lt:"#e0f2fe",features:["Global ATM network","Citi ThankYou Rewards","No foreign transaction fees","Relationship pricing tiers","Investment services"],review:"Citi is a strong pick for international travelers with its global ATM network and no foreign transaction fees. Savings APY is 0.01% but CDs up to 4.10% APY are available."},
-  {name:"US Bank",short:"US Bank",sub:"National bank",type:"traditional",insured:"FDIC",apy:{savings:0.01,cd:4.00,checking:0.01,mma:0.01},min:{savings:25,cd:500,checking:25,mma:25},fee:{savings:4,checking:6.95,mma:10},rating:3.8,badge:"fdic",logo:"USB",lc:"#5b21b6",lt:"#ede9fe",features:["Branch & ATM access nationwide","Smart Rewards program","Overdraft protection","Business accounts","Mortgage products"],review:"US Bank offers a wide product suite and digital tools. Savings APY is 0.01%. CDs up to 4.00% APY available with low $500 minimum."},
-  {name:"PNC Bank",short:"PNC",sub:"National bank",type:"traditional",insured:"FDIC",apy:{savings:0.01,cd:3.50,checking:0.01,mma:0.02},min:{savings:0,cd:1000,checking:0,mma:0},fee:{savings:5,checking:7,mma:10},rating:3.7,badge:"fdic",logo:"PNC",lc:"#854d0e",lt:"#fef9c3",features:["Virtual Wallet budgeting feature","Low Cash Mode overdraft tool","Nationwide branches","Business banking","BBVA USA acquisition adds ATMs"],review:"PNC's Virtual Wallet combines checking, savings, and a growth account in one. Savings APY is 0.01%, but the budgeting tools and Low Cash Mode overdraft feature stand out among big banks."},
-  {name:"TD Bank",short:"TD Bank",sub:"National bank",type:"traditional",insured:"FDIC",apy:{savings:0.01,cd:3.25,checking:0.01,mma:0.01},min:{savings:0,cd:250,checking:0,mma:0},fee:{savings:5,checking:5.99,mma:10},rating:3.6,badge:"fdic",logo:"TD",lc:"#14532d",lt:"#dcfce7",features:["Open 7 days a week","Low $250 CD minimum","Student checking accounts","East Coast branch network","No ATM fees at TD ATMs"],review:"TD Bank stands out for extended hours — open 7 days a week — and student-friendly accounts. Savings APY is 0.01%. CD rates are lower than competitors, but convenience is a key draw."},
-  {name:"Truist Bank",short:"Truist",sub:"National bank",type:"traditional",insured:"FDIC",apy:{savings:0.01,cd:3.00,checking:0.01,mma:0.01},min:{savings:25,cd:1000,checking:25,mma:25},fee:{savings:5,checking:8,mma:10},rating:3.5,badge:"fdic",logo:"TR",lc:"#475569",lt:"#f1f5f9",features:["BB&T + SunTrust merger","Zelle transfers","Southeast/Mid-Atlantic branches","Wealth management","Business banking"],review:"Truist formed from the BB&T and SunTrust merger. Rates are among the lowest on the list at 0.01% savings APY, but the bank has a large Southeast and Mid-Atlantic branch footprint."},
-  {name:"Varo Bank",short:"Varo",sub:"Online bank",type:"online",insured:"FDIC",apy:{savings:5.00,cd:0,checking:0,mma:0},min:{savings:0,cd:0,checking:0,mma:0},fee:{savings:0,checking:0,mma:0},rating:4.4,badge:"promo",logo:"VR",lc:"#6d28d9",lt:"#ede9fe",features:["Up to 5.00% APY on savings","Conditions: direct deposit + balance req.","No monthly fees","Early paycheck access","No minimum balance"],review:"Varo Bank leads the market with up to 5.00% APY on savings — but earning the full rate requires monthly direct deposit and average balance conditions. Without qualifying, the base rate is much lower. Best for those who can meet the requirements."},
-  {name:"Axos Bank",short:"Axos",sub:"Online bank",type:"online",insured:"FDIC",apy:{savings:4.66,cd:4.10,checking:0.51,mma:4.66},min:{savings:0,cd:0,checking:0,mma:0},fee:{savings:0,checking:0,mma:0},rating:4.6,badge:"top",logo:"AX",lc:"#0c4a6e",lt:"#e0f2fe",features:["4.66% savings APY — no conditions","0.51% checking APY (Axos ONE bundle)","No monthly fees","95,000+ fee-free ATMs","No minimum balance"],review:"Axos Bank is one of the strongest all-round online banks, offering 4.66% APY on savings with no conditions, no fees, and no minimum. The Axos ONE bundle also pays 0.51% APY on checking — one of the best checking rates available."},
-  {name:"SoFi Bank",short:"SoFi",sub:"Online bank",type:"online",insured:"FDIC",apy:{savings:4.50,cd:0,checking:0.50,mma:0},min:{savings:0,cd:0,checking:0,mma:0},fee:{savings:0,checking:0,mma:0},rating:4.6,badge:"promo",logo:"SF",lc:"#0f766e",lt:"#ccfbf1",features:["Up to 4.50% APY (with direct deposit)","Checking + savings combo","No account fees","Get paid 2 days early","Up to $2M FDIC coverage via partners"],review:"SoFi offers up to 4.50% savings APY when you have an eligible direct deposit. Without direct deposit the rate drops to 1.20% APY. The early paycheck and expanded FDIC coverage are standout perks."},
-  {name:"Marcus by Goldman Sachs",short:"Marcus",sub:"Online bank",type:"online",insured:"FDIC",apy:{savings:3.50,cd:4.00,checking:0,mma:0},min:{savings:0,cd:500,checking:0,mma:0},fee:{savings:0,checking:0,mma:0},rating:4.5,badge:"fdic",logo:"MG",lc:"#065f46",lt:"#d1fae5",features:["No fees — ever","No minimum balance","1-yr CD: 4.00% APY","Rate bump CD option","Goldman Sachs backing"],review:"Marcus has a solid 3.50% savings APY with zero fees and no minimums. Their 1-year CD at 4.00% APY remains competitive with a low $500 minimum. A trustworthy, no-frills option."},
-  {name:"Ally Bank",short:"Ally",sub:"Online bank",type:"online",insured:"FDIC",apy:{savings:4.00,cd:3.50,checking:0.10,mma:4.00},min:{savings:0,cd:0,checking:0,mma:0},fee:{savings:0,checking:0,mma:0},rating:4.7,badge:"top",logo:"AL",lc:"#7c3aed",lt:"#ede9fe",features:["No monthly fees ever","4.00% savings APY — no conditions","24/7 US-based support","No minimum balance","Savings Buckets & round-up tools"],review:"Ally is a perennial top-rated online bank. Its 4.00% savings APY requires no conditions — no direct deposit, no minimum. Excellent customer service and savings tools make it a consistent top pick."},
-  {name:"Discover Bank",short:"Discover",sub:"Online bank",type:"online",insured:"FDIC",apy:{savings:4.25,cd:4.00,checking:0,mma:4.00},min:{savings:0,cd:2500,checking:0,mma:2500},fee:{savings:0,checking:0,mma:0},rating:4.7,badge:"top",logo:"DB",lc:"#b45309",lt:"#fef3c7",features:["4.25% savings APY","No fees on any account","Sub-accounts for savings goals","1% cashback debit card","24/7 US-based support"],review:"Discover Bank offers 4.25% savings APY with no fees and an excellent all-round experience. Sub-accounts let you save for multiple goals simultaneously. The 1% cashback debit card is a rare perk."},
-  {name:"LendingClub Bank",short:"LendingClub",sub:"Online bank",type:"online",insured:"FDIC",apy:{savings:4.00,cd:4.15,checking:0.10,mma:4.00},min:{savings:0,cd:500,checking:0,mma:0},fee:{savings:0,checking:0,mma:0},rating:4.4,badge:"top",logo:"LC",lc:"#1d4ed8",lt:"#dbeafe",features:["LevelUp savings: APY boost over $250/mo","4.15% 1-yr CD APY","0.10% checking APY","Unlimited ATM fee rebates","No monthly fees"],review:"LendingClub's LevelUp Savings pays 4.00% APY when you deposit $250/month or more. Their 1-year CD at 4.15% APY is highly competitive. Unlimited ATM rebates are a major plus."},
-  {name:"EverBank",short:"EverBank",sub:"Online bank",type:"online",insured:"FDIC",apy:{savings:4.30,cd:4.05,checking:0.10,mma:4.30},min:{savings:0,cd:0,checking:0,mma:0},fee:{savings:0,checking:0,mma:0},rating:4.4,badge:"top",logo:"EB",lc:"#0369a1",lt:"#e0f2fe",features:["4.30% Performance Savings APY","No fees, no minimum","Strong CD lineup","Foreign currency accounts","Online + phone support"],review:"EverBank's Performance Savings offers 4.30% APY with no conditions, no fees, and no minimum. Formerly TIAA Bank, it's a well-run institution with competitive rates. Foreign currency accounts are rare."},
-  {name:"Forbright Bank",short:"Forbright",sub:"Online bank",type:"online",insured:"FDIC",apy:{savings:3.85,cd:4.05,checking:0,mma:3.85},min:{savings:0,cd:1000,checking:0,mma:0},fee:{savings:0,checking:0,mma:0},rating:4.3,badge:"fdic",logo:"FB",lc:"#166534",lt:"#dcfce7",features:["3.85% savings APY","Eco-friendly banking mission","No monthly fees","No minimum balance","FDIC insured"],review:"Forbright Bank offers 3.85% savings APY alongside a unique eco-focused mission — deposits fund clean energy projects. A good choice for value-driven savers."},
-  {name:"Capital One 360",short:"Capital One",sub:"Online + cafés",type:"online",insured:"FDIC",apy:{savings:3.10,cd:4.10,checking:0.10,mma:3.10},min:{savings:0,cd:0,checking:0,mma:0},fee:{savings:0,checking:0,mma:0},rating:4.5,badge:"top",logo:"CO",lc:"#1d4ed8",lt:"#dbeafe",features:["No fees on any account","Physical café locations","Great mobile app","Teen & kid accounts","4.10% 1-yr CD APY"],review:"Capital One 360 bridges online rates with physical café-style branches. The 3.10% savings APY is above the national average. No fees and a top-rated app. Their 1-year CD at 4.10% APY is among the best."},
-  {name:"American Express HYSA",short:"Amex HYSA",sub:"Online savings",type:"online",insured:"FDIC",apy:{savings:3.70,cd:0,checking:0,mma:0},min:{savings:0,cd:0,checking:0,mma:0},fee:{savings:0,checking:0,mma:0},rating:4.4,badge:"fdic",logo:"AE",lc:"#1d4ed8",lt:"#dbeafe",features:["No monthly fees","No minimum balance","24/7 customer support","Trusted global brand","Easy external account linking"],review:"The Amex HYSA offers 3.70% APY with zero fees, no minimum, and the backing of a globally trusted brand. Savings-only (no checking or CDs), but a reliable pick for dedicated savers."},
-  {name:"Barclays US",short:"Barclays",sub:"Online bank",type:"online",insured:"FDIC",apy:{savings:3.65,cd:3.90,checking:0,mma:0},min:{savings:0,cd:0,checking:0,mma:0},fee:{savings:0,checking:0,mma:0},rating:4.3,badge:"fdic",logo:"BR",lc:"#075985",lt:"#e0f2fe",features:["3.65% tiered savings APY","No fees, no minimum","Easy online transfers","UK-based parent company","Transparent fee structure"],review:"Barclays US offers 3.65% tiered savings APY with no fees or minimums. Simple and reliable with a trusted UK parent. CD rates at 3.90%."},
-  {name:"Synchrony Bank",short:"Synchrony",sub:"Online bank",type:"online",insured:"FDIC",apy:{savings:4.10,cd:4.00,checking:0,mma:4.10},min:{savings:0,cd:0,checking:0,mma:0},fee:{savings:0,checking:0,mma:0},rating:4.4,badge:"fdic",logo:"SY",lc:"#166534",lt:"#dcfce7",features:["4.10% savings APY","No fees, no minimum","ATM fee reimbursement","Diamond Perks tier for high balances","CDs from 3 months to 5 years"],review:"Synchrony Bank offers 4.10% savings APY with no minimum and no fees. Diamond Perks tier unlocks ATM reimbursements for higher balances. A consistent high-yield option."},
-  {name:"UFB Direct",short:"UFB",sub:"Online bank",type:"online",insured:"FDIC",apy:{savings:4.01,cd:0,checking:0,mma:4.01},min:{savings:0,cd:0,checking:0,mma:0},fee:{savings:0,checking:0,mma:0},rating:4.3,badge:"fdic",logo:"UF",lc:"#4c1d95",lt:"#ede9fe",features:["4.01% savings APY","No monthly fees","No minimum balance","Free debit card","Mobile deposit"],review:"UFB Direct consistently delivers near-top savings APY with no fees or minimums. Simple product lineup — primarily savings and money market. No CDs, but hard to beat on pure rate."},
-  {name:"Bread Savings",short:"Bread",sub:"Online bank",type:"online",insured:"FDIC",apy:{savings:4.10,cd:4.15,checking:0,mma:0},min:{savings:100,cd:1500,checking:0,mma:0},fee:{savings:0,checking:0,mma:0},rating:4.3,badge:"fdic",logo:"BS",lc:"#9a3412",lt:"#ffedd5",features:["4.10% savings APY","4.15% 1-yr CD APY","$100 savings minimum","Daily compounding interest","No monthly fees"],review:"Bread Savings offers a strong 4.10% savings APY and a 4.15% 1-year CD. The $100 savings minimum and daily compounding are positives. Formerly Comenity Direct."},
-  {name:"Bask Bank",short:"Bask",sub:"Online bank",type:"online",insured:"FDIC",apy:{savings:3.85,cd:4.05,checking:0,mma:0},min:{savings:0,cd:1000,checking:0,mma:0},fee:{savings:0,checking:0,mma:0},rating:4.2,badge:"fdic",logo:"BK",lc:"#0c4a6e",lt:"#e0f2fe",features:["3.85% savings APY","Option to earn American Airlines miles","4.05% 1-yr CD APY","No fees, no minimum","AAdvantage partner"],review:"Bask Bank lets you choose between cash interest (3.85% APY) or American Airlines miles on savings — unique for frequent flyers. CDs at 4.05% APY with a $1,000 minimum."},
-  {name:"CIT Bank",short:"CIT",sub:"Online bank",type:"online",insured:"FDIC",apy:{savings:3.75,cd:4.00,checking:0,mma:3.75},min:{savings:100,cd:1000,checking:0,mma:100},fee:{savings:0,checking:0,mma:0},rating:4.3,badge:"promo",logo:"CT",lc:"#9a3412",lt:"#ffedd5",features:["3.75% Platinum Savings APY","1-yr CD: 4.00% APY","$100 minimum balance","No monthly fees","Simple online interface"],review:"CIT Bank's Platinum Savings offers 3.75% APY — solid with a low $100 minimum. Their 1-year CD at 4.00% APY is reliable with a $1,000 minimum."},
-  {name:"Alliant Credit Union",short:"Alliant",sub:"Credit union",type:"online",insured:"NCUA",apy:{savings:4.00,cd:3.90,checking:0.25,mma:0},min:{savings:100,cd:1000,checking:0,mma:0},fee:{savings:0,checking:0,mma:0},rating:4.5,badge:"top",logo:"AU",lc:"#1e3a8a",lt:"#dbeafe",features:["4.00% savings APY","0.25% checking APY","No monthly fees","80,000+ fee-free ATMs","NCUA insured"],review:"Alliant Credit Union is one of the best online credit unions. Savings earns 4.00% APY and checking earns 0.25% — rare for any checking account. NCUA insured up to $250,000."},
-  {name:"Navy Federal Credit Union",short:"Navy Federal",sub:"Credit union (military)",type:"traditional",insured:"NCUA",apy:{savings:3.50,cd:4.05,checking:0.01,mma:3.50},min:{savings:5,cd:1000,checking:0,mma:0},fee:{savings:0,checking:0,mma:0},rating:4.6,badge:"top",logo:"NF",lc:"#1e3a8a",lt:"#dbeafe",features:["Military members & families only","3.50% savings APY","4.05% jumbo CD APY","No monthly fees","Exceptional member service"],review:"Navy Federal is the largest US credit union, exclusively serving military members, veterans, and families. Competitive rates, zero fees, and exceptional service earn it top ratings."},
-  {name:"Connexus Credit Union",short:"Connexus",sub:"Credit union",type:"online",insured:"NCUA",apy:{savings:3.25,cd:4.00,checking:1.75,mma:0},min:{savings:100,cd:5000,checking:0,mma:0},fee:{savings:0,checking:0,mma:0},rating:4.3,badge:"top",logo:"CX",lc:"#075985",lt:"#e0f2fe",features:["1.75% rewards checking APY","CDs up to 4.00%","Anyone can join ($5 donation)","NCUA insured","No monthly fees"],review:"Connexus offers one of the highest checking APYs at 1.75%, open to anyone via a $5 charitable donation. CD rates are competitive. Top pick for earning on everyday checking."},
-  {name:"First National Bank of America",short:"FNBA",sub:"Online bank",type:"online",insured:"FDIC",apy:{savings:0,cd:4.30,checking:0,mma:0},min:{savings:0,cd:1000,checking:0,mma:0},fee:{savings:0,checking:0,mma:0},rating:4.2,badge:"top",logo:"FN",lc:"#1e40af",lt:"#dbeafe",features:["Highest 1-yr CD rate: 4.30% APY","Terms from 3 months to 10 years","$1,000 minimum deposit","Available nationwide","FDIC insured"],review:"First National Bank of America offers the top 1-year CD rate at 4.30% APY, with terms from 3 months to 10 years. No savings or checking — CD-only but the benchmark rate for ladders."},
-  {name:"Limelight Bank",short:"Limelight",sub:"Online bank",type:"online",insured:"FDIC",apy:{savings:0,cd:4.08,checking:0,mma:0},min:{savings:0,cd:1000,checking:0,mma:0},fee:{savings:0,checking:0,mma:0},rating:4.1,badge:"fdic",logo:"LL",lc:"#166534",lt:"#dcfce7",features:["4.08% 6-month CD APY","Consistently top-ranked CDs","$1,000 minimum deposit","No monthly fees","FDIC insured"],review:"Limelight Bank specializes in CDs and consistently ranks at the top for CD rates. Their 6-month CD at 4.08% APY makes it ideal for short-term CD strategies. No savings account."},
-  {name:"Western Alliance Bank",short:"W. Alliance",sub:"Online bank",type:"online",insured:"FDIC",apy:{savings:4.40,cd:0,checking:0,mma:0},min:{savings:1,cd:0,checking:0,mma:0},fee:{savings:0,checking:0,mma:0},rating:4.3,badge:"top",logo:"WA",lc:"#0c4a6e",lt:"#e0f2fe",features:["4.40% savings APY","Very low $1 minimum balance","No monthly fees","FDIC insured","Easy online account opening"],review:"Western Alliance Bank's high-yield savings earns 4.40% APY with just a $1 minimum balance — one of the lowest barriers to entry among top-rate accounts. Savings-only, but excellent for pure high-yield saving."},
-  {name:"Vio Bank",short:"Vio",sub:"Online bank",type:"online",insured:"FDIC",apy:{savings:4.03,cd:4.00,checking:0,mma:4.03},min:{savings:100,cd:500,checking:0,mma:100},fee:{savings:0,checking:0,mma:0},rating:4.2,badge:"fdic",logo:"VO",lc:"#4c1d95",lt:"#ede9fe",features:["4.03% savings APY","$100 low minimum","No monthly fees","Daily compounding","FDIC insured via MidFirst Bank"],review:"Vio Bank (an online division of MidFirst Bank) offers 4.03% savings APY with a low $100 minimum and no fees. Spotlighted by NerdWallet as a top accessible HYSA in May 2026."},
+// ── LOGO ─────────────────────────────────────────────────────────────────────
+function logoImg(domain, fb, fbg, sz=20){
+  return `<img src="https://www.google.com/s2/favicons?domain=${domain}&sz=64" alt=""
+    style="width:${sz}px;height:${sz}px;object-fit:contain"
+    onerror="safeF(this,'${fb}','${fbg}')">`;
+}
+function safeF(img,t,bg){
+  try{const p=img.parentNode;if(!p)return;p.innerHTML=`<span style="font-size:9px;font-weight:700;color:#fff">${t}</span>`;p.style.background=bg;}catch(e){}
+}
+
+// ── BONUSES DATA (verified May 2026) ─────────────────────────────────────────
+const BONUSES = [
+  {
+    bank:"Chase Total Checking", domain:"chase.com", fb:"CH", fbg:"#92400e",
+    type:"checking", bonus:300, apy:0.01,
+    req_dd:500, req_dd_days:90, req_balance:0, req_debit:0,
+    no_cc:false, no_dd:false, difficulty:"easy",
+    expiry:"2026-07-31",
+    notes:"Receive direct deposits totaling $500 or more within 90 days of account opening.",
+    promo:"AUTUMN300"
+  },
+  {
+    bank:"Chase Savings", domain:"chase.com", fb:"CH", fbg:"#92400e",
+    type:"savings", bonus:150, apy:0.01,
+    req_dd:0, req_dd_days:0, req_balance:10000, req_balance_days:90,
+    no_cc:false, no_dd:true, difficulty:"medium",
+    expiry:"2026-07-31",
+    notes:"Deposit $10,000 or more in new money within 20 days and maintain it for 90 days.",
+    promo:null
+  },
+  {
+    bank:"Bank of America Advantage Banking", domain:"bankofamerica.com", fb:"BA", fbg:"#1e40af",
+    type:"checking", bonus:200, apy:0.01,
+    req_dd:1000, req_dd_days:90, req_balance:0, req_debit:0,
+    no_cc:false, no_dd:false, difficulty:"easy",
+    expiry:"2026-08-31",
+    notes:"Receive qualifying direct deposits totaling $1,000 or more within 90 days of opening.",
+    promo:"BONUSOFFER"
+  },
+  {
+    bank:"Citi Priority Checking", domain:"citibank.com", fb:"CI", fbg:"#0369a1",
+    type:"checking", bonus:500, apy:0.04,
+    req_dd:0, req_dd_days:0, req_balance:30000, req_balance_days:60,
+    no_cc:false, no_dd:true, difficulty:"hard",
+    expiry:"2026-09-30",
+    notes:"Maintain a combined average balance of $30,000+ across eligible accounts for 60 days.",
+    promo:null
+  },
+  {
+    bank:"US Bank Smartly Checking", domain:"usbank.com", fb:"USB", fbg:"#5b21b6",
+    type:"checking", bonus:400, apy:0.01,
+    req_dd:3000, req_dd_days:60, req_balance:0, req_debit:0,
+    no_cc:false, no_dd:false, difficulty:"medium",
+    expiry:"2026-09-30",
+    notes:"Enroll in the promotion then receive $3,000+ in qualifying direct deposits within 60 days.",
+    promo:"Q3BONUS"
+  },
+  {
+    bank:"SoFi Checking & Savings", domain:"sofi.com", fb:"SF", fbg:"#0f766e",
+    type:"checking", bonus:300, apy:4.50,
+    req_dd:5000, req_dd_days:25, req_balance:0, req_debit:0,
+    no_cc:false, no_dd:false, difficulty:"medium",
+    expiry:null,
+    notes:"Set up direct deposit of $5,000+ within 25 days for $300 bonus. Smaller DD amount earns $50.",
+    promo:null
+  },
+  {
+    bank:"Axos Rewards Checking", domain:"axosbank.com", fb:"AX", fbg:"#0c4a6e",
+    type:"checking", bonus:300, apy:0.51,
+    req_dd:5000, req_dd_days:30, req_balance:0, req_debit:0,
+    no_cc:false, no_dd:false, difficulty:"medium",
+    expiry:null,
+    notes:"Use promo code at signup. Make qualifying direct deposit of $5,000+ within 30 days.",
+    promo:"SUNNYBONUS"
+  },
+  {
+    bank:"Capital One 360 Checking", domain:"capitalone.com", fb:"CO", fbg:"#1d4ed8",
+    type:"checking", bonus:250, apy:0.10,
+    req_dd:500, req_dd_days:75, req_balance:0, req_debit:0,
+    no_cc:false, no_dd:false, difficulty:"easy",
+    expiry:"2026-08-01",
+    notes:"Receive two qualifying direct deposits of $500 or more each within 75 days.",
+    promo:null
+  },
+  {
+    bank:"Wells Fargo Everyday Checking", domain:"wellsfargo.com", fb:"WF", fbg:"#991b1b",
+    type:"checking", bonus:300, apy:0.01,
+    req_dd:1000, req_dd_days:90, req_balance:0, req_debit:10,
+    no_cc:false, no_dd:false, difficulty:"medium",
+    expiry:"2026-06-30",
+    notes:"Receive $1,000+ in qualifying direct deposits AND make at least 10 debit card purchases within 90 days.",
+    promo:null
+  },
+  {
+    bank:"TD Bank Beyond Checking", domain:"td.com", fb:"TD", fbg:"#14532d",
+    type:"checking", bonus:300, apy:0.01,
+    req_dd:2500, req_dd_days:60, req_balance:0, req_debit:0,
+    no_cc:false, no_dd:false, difficulty:"medium",
+    expiry:"2026-07-31",
+    notes:"Receive direct deposits totaling $2,500 or more within 60 days of account opening.",
+    promo:null
+  },
+  {
+    bank:"Ally Bank Savings", domain:"ally.com", fb:"AL", fbg:"#7c3aed",
+    type:"savings", bonus:100, apy:4.00,
+    req_dd:0, req_dd_days:0, req_balance:25000, req_balance_days:30,
+    no_cc:true, no_dd:true, difficulty:"medium",
+    expiry:"2026-10-31",
+    notes:"Deposit $25,000 or more in new money within 30 days. Earns 4.00% APY ongoing.",
+    promo:null
+  },
+  {
+    bank:"Marcus by Goldman Sachs", domain:"marcus.com", fb:"MG", fbg:"#065f46",
+    type:"savings", bonus:100, apy:3.50,
+    req_dd:0, req_dd_days:0, req_balance:10000, req_balance_days:90,
+    no_cc:true, no_dd:true, difficulty:"easy",
+    expiry:null,
+    notes:"Deposit $10,000 or more in new money. No direct deposit required. Earns 3.50% APY.",
+    promo:null
+  },
+  {
+    bank:"Axos High Yield Savings", domain:"axosbank.com", fb:"AX", fbg:"#0c4a6e",
+    type:"savings", bonus:200, apy:4.66,
+    req_dd:0, req_dd_days:0, req_balance:5000, req_balance_days:60,
+    no_cc:true, no_dd:true, difficulty:"easy",
+    expiry:null,
+    notes:"Deposit $5,000 or more and maintain for 60 days. No direct deposit needed. Earns 4.66% APY.",
+    promo:null
+  },
+  {
+    bank:"Discover Online Savings", domain:"discover.com", fb:"DB", fbg:"#b45309",
+    type:"savings", bonus:200, apy:4.25,
+    req_dd:0, req_dd_days:0, req_balance:25000, req_balance_days:30,
+    no_cc:true, no_dd:true, difficulty:"medium",
+    expiry:"2026-11-30",
+    notes:"Deposit $25,000 or more in new money within 30 days. Earns 4.25% APY ongoing.",
+    promo:null
+  },
+  {
+    bank:"Navy Federal Credit Union Checking", domain:"navyfederal.org", fb:"NF", fbg:"#1e3a8a",
+    type:"checking", bonus:500, apy:0.01,
+    req_dd:500, req_dd_days:90, req_balance:0, req_debit:0,
+    no_cc:false, no_dd:false, difficulty:"easy",
+    expiry:null,
+    notes:"Military members and families only. Receive qualifying direct deposits within 90 days.",
+    promo:null
+  },
 ];
 
-// ─── LIVE DATA STATE ──────────────────────────────────────────────────────────
-let liveRates = {};        // { "Ally Bank": { savings: 4.00 }, ... }
-let nationalAvgs = {};
-let scrapedAt = null;
-let dataSource = 'fallback'; // 'live' | 'stale' | 'fallback'
+// ── RATES DATA (verified May 2026) ────────────────────────────────────────────
+const RATES = [
+  {name:"Varo Bank",       domain:"varomoney.com",  fb:"VR", fbg:"#6d28d9", type:"online",       insured:"FDIC", apy:{savings:5.00,cd:0,   checking:0,   mma:0   }, min:{savings:0,  cd:0,   checking:0, mma:0  }, fee:{savings:0,checking:0,mma:0}, rating:4.4, cond:{savings:"w/ conditions"}},
+  {name:"Axos Bank",       domain:"axosbank.com",   fb:"AX", fbg:"#0c4a6e", type:"online",       insured:"FDIC", apy:{savings:4.66,cd:4.10,checking:0.51,mma:4.66}, min:{savings:0,  cd:0,   checking:0, mma:0  }, fee:{savings:0,checking:0,mma:0}, rating:4.6},
+  {name:"Western Alliance",domain:"westernalliancebancorporation.com",fb:"WA",fbg:"#0c4a6e",type:"online",insured:"FDIC",apy:{savings:4.40,cd:0,checking:0,mma:0},min:{savings:1,cd:0,checking:0,mma:0},fee:{savings:0,checking:0,mma:0},rating:4.3},
+  {name:"SoFi Bank",       domain:"sofi.com",       fb:"SF", fbg:"#0f766e", type:"online",       insured:"FDIC", apy:{savings:4.50,cd:0,   checking:0.50,mma:0   }, min:{savings:0,  cd:0,   checking:0, mma:0  }, fee:{savings:0,checking:0,mma:0}, rating:4.6, cond:{savings:"w/ direct deposit"}},
+  {name:"Discover Bank",   domain:"discover.com",   fb:"DB", fbg:"#b45309", type:"online",       insured:"FDIC", apy:{savings:4.25,cd:4.00,checking:0,   mma:4.00}, min:{savings:0,  cd:2500,checking:0, mma:2500},fee:{savings:0,checking:0,mma:0}, rating:4.7},
+  {name:"UFB Direct",      domain:"ufbdirect.com",  fb:"UF", fbg:"#4c1d95", type:"online",       insured:"FDIC", apy:{savings:4.01,cd:0,   checking:0,   mma:4.01}, min:{savings:0,  cd:0,   checking:0, mma:0  }, fee:{savings:0,checking:0,mma:0}, rating:4.3},
+  {name:"Synchrony Bank",  domain:"synchronybank.com",fb:"SY",fbg:"#166534",type:"online",       insured:"FDIC", apy:{savings:4.10,cd:4.00,checking:0,   mma:4.10}, min:{savings:0,  cd:0,   checking:0, mma:0  }, fee:{savings:0,checking:0,mma:0}, rating:4.4},
+  {name:"Ally Bank",       domain:"ally.com",       fb:"AL", fbg:"#7c3aed", type:"online",       insured:"FDIC", apy:{savings:4.00,cd:3.50,checking:0.10,mma:4.00}, min:{savings:0,  cd:0,   checking:0, mma:0  }, fee:{savings:0,checking:0,mma:0}, rating:4.7},
+  {name:"EverBank",        domain:"everbank.com",   fb:"EB", fbg:"#0369a1", type:"online",       insured:"FDIC", apy:{savings:4.30,cd:4.05,checking:0.10,mma:4.30}, min:{savings:0,  cd:0,   checking:0, mma:0  }, fee:{savings:0,checking:0,mma:0}, rating:4.4},
+  {name:"Bread Savings",   domain:"breadsavings.com",fb:"BS",fbg:"#9a3412", type:"online",       insured:"FDIC", apy:{savings:4.10,cd:4.15,checking:0,   mma:0   }, min:{savings:100,cd:1500,checking:0, mma:0  }, fee:{savings:0,checking:0,mma:0}, rating:4.3},
+  {name:"LendingClub Bank",domain:"lendingclub.com",fb:"LC", fbg:"#1d4ed8", type:"online",       insured:"FDIC", apy:{savings:4.00,cd:4.15,checking:0.10,mma:4.00}, min:{savings:0,  cd:500, checking:0, mma:0  }, fee:{savings:0,checking:0,mma:0}, rating:4.4},
+  {name:"Alliant CU",      domain:"alliantcreditunion.org",fb:"AU",fbg:"#1e3a8a",type:"online",  insured:"NCUA", apy:{savings:4.00,cd:3.90,checking:0.25,mma:0   }, min:{savings:100,cd:1000,checking:0, mma:0  }, fee:{savings:0,checking:0,mma:0}, rating:4.5},
+  {name:"Marcus",          domain:"marcus.com",     fb:"MG", fbg:"#065f46", type:"online",       insured:"FDIC", apy:{savings:3.50,cd:4.00,checking:0,   mma:0   }, min:{savings:0,  cd:500, checking:0, mma:0  }, fee:{savings:0,checking:0,mma:0}, rating:4.5},
+  {name:"Amex HYSA",       domain:"americanexpress.com",fb:"AE",fbg:"#1d4ed8",type:"online",     insured:"FDIC", apy:{savings:3.70,cd:0,   checking:0,   mma:0   }, min:{savings:0,  cd:0,   checking:0, mma:0  }, fee:{savings:0,checking:0,mma:0}, rating:4.4},
+  {name:"Capital One 360", domain:"capitalone.com", fb:"CO", fbg:"#1d4ed8", type:"online",       insured:"FDIC", apy:{savings:3.10,cd:4.10,checking:0.10,mma:3.10}, min:{savings:0,  cd:0,   checking:0, mma:0  }, fee:{savings:0,checking:0,mma:0}, rating:4.5},
+  {name:"Barclays US",     domain:"barclaysus.com", fb:"BR", fbg:"#075985", type:"online",       insured:"FDIC", apy:{savings:3.65,cd:3.90,checking:0,   mma:0   }, min:{savings:0,  cd:0,   checking:0, mma:0  }, fee:{savings:0,checking:0,mma:0}, rating:4.3},
+  {name:"Vio Bank",        domain:"viobank.com",    fb:"VO", fbg:"#4c1d95", type:"online",       insured:"FDIC", apy:{savings:4.03,cd:4.00,checking:0,   mma:4.03}, min:{savings:100,cd:500, checking:0, mma:100}, fee:{savings:0,checking:0,mma:0}, rating:4.2},
+  {name:"First Natl Bank of America",domain:"fnba.com",fb:"FN",fbg:"#1e40af",type:"online",      insured:"FDIC", apy:{savings:0,   cd:4.30,checking:0,   mma:0   }, min:{savings:0,  cd:1000,checking:0, mma:0  }, fee:{savings:0,checking:0,mma:0}, rating:4.2},
+  {name:"Navy Federal CU", domain:"navyfederal.org",fb:"NF", fbg:"#1e3a8a", type:"traditional",  insured:"NCUA", apy:{savings:3.50,cd:4.05,checking:0.01,mma:3.50}, min:{savings:5,  cd:1000,checking:0, mma:0  }, fee:{savings:0,checking:0,mma:0}, rating:4.6},
+  {name:"Connexus CU",     domain:"connexuscu.org", fb:"CX", fbg:"#075985", type:"online",       insured:"NCUA", apy:{savings:3.25,cd:4.00,checking:1.75,mma:0   }, min:{savings:100,cd:5000,checking:0, mma:0  }, fee:{savings:0,checking:0,mma:0}, rating:4.3},
+  {name:"Bank of America", domain:"bankofamerica.com",fb:"BA",fbg:"#1e40af",type:"traditional",  insured:"FDIC", apy:{savings:0.01,cd:4.20,checking:0.01,mma:0.02}, min:{savings:100,cd:1000,checking:25,mma:2500},fee:{savings:8,checking:12,mma:12},rating:3.8},
+  {name:"Chase Bank",      domain:"chase.com",      fb:"CH", fbg:"#92400e", type:"traditional",  insured:"FDIC", apy:{savings:0.01,cd:4.00,checking:0.01,mma:0.01}, min:{savings:0,  cd:1000,checking:0, mma:0  }, fee:{savings:5,checking:12,mma:12},rating:4.0},
+  {name:"Wells Fargo",     domain:"wellsfargo.com", fb:"WF", fbg:"#991b1b", type:"traditional",  insured:"FDIC", apy:{savings:0.01,cd:3.75,checking:0.01,mma:0.01}, min:{savings:25, cd:2500,checking:25,mma:25 }, fee:{savings:5,checking:10,mma:12},rating:3.5},
+  {name:"Citibank",        domain:"citibank.com",   fb:"CI", fbg:"#0369a1", type:"traditional",  insured:"FDIC", apy:{savings:0.01,cd:4.10,checking:0.01,mma:0.04}, min:{savings:0,  cd:500, checking:0, mma:0  }, fee:{savings:4.5,checking:12,mma:10},rating:3.9},
+  {name:"US Bank",         domain:"usbank.com",     fb:"USB",fbg:"#5b21b6", type:"traditional",  insured:"FDIC", apy:{savings:0.01,cd:4.00,checking:0.01,mma:0.01}, min:{savings:25, cd:500, checking:25,mma:25 }, fee:{savings:4,checking:6.95,mma:10},rating:3.8},
+  {name:"PNC Bank",        domain:"pnc.com",        fb:"PNC",fbg:"#854d0e", type:"traditional",  insured:"FDIC", apy:{savings:0.01,cd:3.50,checking:0.01,mma:0.02}, min:{savings:0,  cd:1000,checking:0, mma:0  }, fee:{savings:5,checking:7,mma:10},rating:3.7},
+  {name:"TD Bank",         domain:"td.com",         fb:"TD", fbg:"#14532d", type:"traditional",  insured:"FDIC", apy:{savings:0.01,cd:3.25,checking:0.01,mma:0.01}, min:{savings:0,  cd:250, checking:0, mma:0  }, fee:{savings:5,checking:5.99,mma:10},rating:3.6},
+];
 
-async function loadRates() {
-  try {
-    const res = await fetch('rates.json?v=' + Date.now());
-    if (!res.ok) throw new Error('not found');
-    const data = await res.json();
-    scrapedAt = new Date(data.scraped_at);
-    nationalAvgs = data.national_averages || {};
-    const rawBanks = data.banks || {};
+// ── STATE ─────────────────────────────────────────────────────────────────────
+let bFilters={type:'all',flags:[]};
+let rateFilter='savings', rateType='all';
+let liveRates={}, nationalAvgs={};
 
-    // Merge live rates into lookup
-    for (const [name, rates] of Object.entries(rawBanks)) {
-      liveRates[name] = rates;
-    }
-
-    // Determine freshness: stale if > 30 hours old
-    const ageHours = (Date.now() - scrapedAt.getTime()) / 3600000;
-    dataSource = ageHours <= 30 ? 'live' : 'stale';
-
-    console.log(`Loaded rates.json — ${Object.keys(liveRates).length} banks, age ${ageHours.toFixed(1)}h, source: ${dataSource}`);
-  } catch(e) {
-    dataSource = 'fallback';
-    console.log('rates.json not found — using fallback static rates');
-  }
-  updateUI();
-  renderRates();
-  if (document.getElementById('compareGrid').children.length > 0) renderCompare();
+// ── NAV ───────────────────────────────────────────────────────────────────────
+function goTab(id, btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.getElementById('page-'+id).classList.add('on');
+  if(btn) btn.classList.add('on');
 }
 
-function getApy(bank, product) {
-  // Live rate takes priority; fall back to static
-  const live = liveRates[bank.name];
-  if (live && live[product] !== undefined) return live[product];
-  return bank.apy[product];
-}
-
-function updateUI() {
-  // Hero subtitle
-  const sub = document.getElementById('heroSub');
-  if (dataSource === 'live') {
-    sub.textContent = `Live rates — last scraped ${scrapedAt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})} at ${scrapedAt.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'})}`;
-  } else if (dataSource === 'stale') {
-    sub.textContent = `Rates from ${scrapedAt.toLocaleDateString('en-US',{month:'short',day:'numeric'})} — scraper may need attention`;
-  } else {
-    sub.textContent = 'We track rates across 800+ banks — compare, review, and find the best accounts for you.';
-  }
-
-  // Stats bar
-  const topSavings = [...BANKS].sort((a,b) => getApy(b,'savings')-getApy(a,'savings'))[0];
-  const topCD      = [...BANKS].sort((a,b) => getApy(b,'cd')-getApy(a,'cd'))[0];
-  document.getElementById('statTopSavings').textContent     = getApy(topSavings,'savings').toFixed(2) + '%';
-  document.getElementById('statTopSavingsNote').textContent = topSavings.name;
-  document.getElementById('statNatlAvg').textContent        = (nationalAvgs.savings_national_avg || 0.38).toFixed(2) + '%';
-  document.getElementById('statNatlNote').textContent       = nationalAvgs.fdic_report_date ? `FDIC avg — ${nationalAvgs.fdic_report_date}` : 'FDIC national avg';
-  document.getElementById('statTopCD').textContent          = getApy(topCD,'cd').toFixed(2) + '%';
-  document.getElementById('statTopCDNote').textContent      = topCD.name;
-
-  if (scrapedAt) {
-    document.getElementById('statUpdated').textContent     = scrapedAt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-    document.getElementById('statUpdatedNote').textContent = dataSource === 'live' ? '✓ scraped today' : dataSource === 'stale' ? '⚠ scraper may be behind' : 'fallback data';
-  }
-
-  // Rate banner
-  const banner = document.getElementById('rateBanner');
-  if (dataSource === 'live') {
-    banner.innerHTML = `<div class="live-banner"><div class="live-dot"></div><span>Live rates — automatically scraped daily from each bank's public website and FDIC data. Last updated ${scrapedAt.toLocaleString()}.</span></div>`;
-  } else if (dataSource === 'stale') {
-    banner.innerHTML = `<div class="stale-banner">⚠ Rates were last scraped ${scrapedAt.toLocaleString()}. The daily scraper may need attention. Showing last known values.</div>`;
-  } else {
-    banner.innerHTML = `<div class="stale-banner">ℹ No rates.json found — showing manually-verified May 2026 baseline rates. Deploy scraper.py + GitHub Actions workflow to enable live updates.</div>`;
-  }
-
-  // Live badge next to section title
-  document.getElementById('liveBadge').innerHTML = dataSource === 'live'
-    ? `<span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--green-dark);background:var(--green-light);border:1px solid #9ae6cc;border-radius:6px;padding:3px 10px"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block"></span>Live data</span>`
-    : `<span style="font-size:12px;color:var(--gray);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:3px 10px">📋 Baseline data</span>`;
-}
-
-// ─── UI STATE ─────────────────────────────────────────────────────────────────
-let activeFilter = 'savings';
-let activeType   = 'all';
-let selectedBanks = [];
-
-function showPage(id, btn) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
-  if (btn) btn.classList.add('active');
-  if (id === 'compare') renderCompare();
-  if (id === 'reviews') renderReviews();
-}
-
-function setFilter(f, btn) {
-  activeFilter = f;
-  document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderRates();
-}
-
-function setType(t, btn) {
-  activeType = t;
-  document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderRates();
-}
-
-function renderRates() {
-  const q = (document.getElementById('searchInput').value || '').toLowerCase().trim();
-  let list = BANKS.filter(b => {
-    const matchQ    = !q || b.name.toLowerCase().includes(q) || (b.short||'').toLowerCase().includes(q);
-    const matchType = activeType === 'all' || b.type === activeType;
-    return matchQ && matchType;
+// ── BONUSES ───────────────────────────────────────────────────────────────────
+function setBF(key,val,btn){
+  bFilters[key]=val;
+  // reset type pills
+  document.querySelectorAll('#page-bonuses .pill').forEach(p=>{
+    if(['All','Checking','Savings'].includes(p.textContent.trim())) p.classList.remove('on');
   });
-  if (!q) list = list.filter(b => getApy(b, activeFilter) > 0);
-  list = [...list].sort((a, b) => getApy(b, activeFilter) - getApy(a, activeFilter));
+  btn.classList.add('on');
+  renderBonuses();
+}
+function toggleBFF(flag,btn){
+  const i=bFilters.flags.indexOf(flag);
+  if(i>-1){bFilters.flags.splice(i,1);btn.classList.remove('on');}
+  else{bFilters.flags.push(flag);btn.classList.add('on');}
+  renderBonuses();
+}
+function renderBonuses(){
+  const q=(document.getElementById('bonusSearch')?.value||'').toLowerCase();
+  const sort=document.getElementById('bonusSort')?.value||'highest';
+  let list=BONUSES.filter(b=>{
+    if(q&&!b.bank.toLowerCase().includes(q)) return false;
+    if(bFilters.type!=='all'&&b.type!==bFilters.type) return false;
+    if(bFilters.flags.includes('no_dd')&&b.req_dd>0) return false;
+    if(bFilters.flags.includes('no_cc')&&!b.no_cc) return false;
+    return true;
+  });
+  if(sort==='highest') list.sort((a,b)=>b.bonus-a.bonus);
+  else if(sort==='easiest') list.sort((a,b)=>({easy:0,medium:1,hard:2}[a.difficulty])-({easy:0,medium:1,hard:2}[b.difficulty]));
+  else if(sort==='expiring') list.sort((a,b)=>{
+    if(!a.expiry&&!b.expiry) return 0;
+    if(!a.expiry) return 1; if(!b.expiry) return -1;
+    return new Date(a.expiry)-new Date(b.expiry);
+  });
 
-  const body = document.getElementById('ratesBody');
-  if (list.length === 0) {
-    body.innerHTML = `<div class="no-results"><div style="font-size:28px;margin-bottom:8px">🔍</div><strong>No results for "${q}"</strong><br><span style="font-size:13px">Try "ally", "chase", "varo", "axos", or "marcus"</span></div>`;
-    return;
-  }
+  const el=document.getElementById('bonusGrid');
+  const countEl=document.getElementById('bonusCount');
+  if(countEl) countEl.textContent=`${list.length} offer${list.length!==1?'s':''} found`;
+  if(!el) return;
+  if(!list.length){el.innerHTML=`<div class="no-results">No offers match your filters.</div>`;return;}
 
-  body.innerHTML = list.map((b, i) => {
-    const apy  = getApy(b, activeFilter);
-    const min  = b.min[activeFilter];
-    const fee  = b.fee[activeFilter] ?? b.fee.savings ?? 0;
-    const isTop3 = i < 3 && apy > 0;
-    const isLive = liveRates[b.name] && liveRates[b.name][activeFilter] !== undefined;
-
-    const badgeHtml = b.badge==='top'?'<span class="badge b-top">Top pick</span>':b.badge==='promo'?'<span class="badge b-promo">Promoted</span>':'<span class="badge b-fdic">FDIC</span>';
-    const insuredBadge = b.insured==='NCUA'?'<span class="badge b-ncua">NCUA</span>':'';
-    const typeTag = `<span class="badge b-type">${b.type==='online'?'Online':'Branches'}</span>`;
-    const cond = (b.name==='Varo Bank')?'w/ conditions':(b.name==='SoFi Bank')?'w/ direct deposit':'';
-    const apyHtml = apy > 0
-      ? `<div class="apy">${apy.toFixed(2)}%</div>${cond?`<div class="apy-cond">${cond}</div>`:''}${isLive?'<div class="apy-live">● live</div>':'<div class="apy-stale">baseline</div>'}`
-      : `<div class="apy-na">Not offered</div>`;
-
-    return `<div class="table-row" style="${isTop3&&apy>0?'background:linear-gradient(90deg,#f0fdf8 0%,transparent 100%)':''}">
-      <div>
-        <div class="bank-name">${b.name}${isTop3&&apy>0?' 🏆':''}</div>
-        <div class="bank-meta">${badgeHtml}${insuredBadge}${typeTag}</div>
+  const today=new Date();
+  el.innerHTML=list.map(b=>{
+    const exp=b.expiry?new Date(b.expiry):null;
+    const days=exp?Math.ceil((exp-today)/86400000):null;
+    const expTag=days!=null?(days<=30?`<span class="tag t-red">⏰ ${days} days left</span>`:`<span class="tag t-gray">Expires ${b.expiry}</span>`):`<span class="tag t-gray">No expiry listed</span>`;
+    const diff={easy:'<span class="tag t-green">Easy</span>',medium:'<span class="tag t-amber">Medium</span>',hard:'<span class="tag t-red">Hard</span>'}[b.difficulty];
+    const ddTag=b.req_dd>0?`<span class="tag t-amber">DD: $${b.req_dd.toLocaleString()} required</span>`:'<span class="tag t-green">No direct deposit</span>';
+    const ccTag=b.no_cc?'<span class="tag t-green">No credit check</span>':'';
+    const apyTag=b.apy>=2?`<span class="tag t-blue">${b.apy}% APY ongoing</span>`:'';
+    const promoTag=b.promo?`<span class="tag t-gray">Code: ${b.promo}</span>`:'';
+    return`<div class="card">
+      <div class="card-head">
+        <div class="logo-wrap">${logoImg(b.domain,b.fb,b.fbg,32)}</div>
+        <div><div class="card-title">${b.bank}</div><div class="card-sub">${b.type.charAt(0).toUpperCase()+b.type.slice(1)} account</div></div>
+        <div class="card-amount green">$${b.bonus.toLocaleString()}<small>cash bonus</small></div>
       </div>
-      <div>${apyHtml}</div>
-      <div style="font-size:13px;color:var(--slate)">${min===0?'None':'$'+min.toLocaleString()}</div>
-      <div style="font-size:13px;color:${fee===0?'var(--green-dark)':'var(--slate)'};font-weight:${fee===0?'500':'400'}">${fee===0?'None ✓':'$'+fee+'/mo'}</div>
-      <div><div class="stars">${'★'.repeat(Math.round(b.rating))}${'☆'.repeat(5-Math.round(b.rating))}</div><div class="rating-num">${b.rating}/5</div></div>
-      <div><button class="detail-btn" onclick="goReview('${b.name.replace(/'/g,"\\'")}')">Details</button></div>
+      <div class="card-tags">${diff}${ddTag}${ccTag}${apyTag}${expTag}${promoTag}</div>
+      <div class="card-req"><strong>Requirement:</strong> ${b.notes}</div>
+      <div class="card-foot">
+        <div class="card-foot-label">${b.apy>0?`<strong>${b.apy}%</strong> APY ongoing`:'Standard deposit APY'}</div>
+        <a href="https://${b.domain}" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+          <button class="view-btn">Open account →</button>
+        </a>
+      </div>
     </div>`;
   }).join('');
 }
 
-function goReview(name) {
-  showPage('reviews', document.querySelectorAll('.nav-btn')[2]);
-  setTimeout(() => {
-    const el = document.querySelector(`[data-bank="${CSS.escape(name)}"]`);
-    if (el) { el.classList.add('highlight'); el.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(()=>el.classList.remove('highlight'),2500); }
-  }, 80);
+// ── RATES ─────────────────────────────────────────────────────────────────────
+function setRF(f,btn){
+  rateFilter=f;
+  document.querySelectorAll('#page-rates .filter-pills:first-of-type .pill').forEach(p=>p.classList.remove('on'));
+  btn.classList.add('on');
+  renderRates();
 }
-
-function renderCompare() {
-  document.getElementById('compareGrid').innerHTML = BANKS.map(b => {
-    const sel = selectedBanks.includes(b.name);
-    const apy = getApy(b,'savings');
-    const cdApy = getApy(b,'cd');
-    return `<div class="bcard ${sel?'sel':''}" onclick="toggleBank('${b.name.replace(/'/g,"\\'")}')">
-      <div class="bcard-logo" style="background:${b.lc};color:${b.lt}">${b.logo}</div>
-      <div class="bcard-name">${b.name}</div>
-      <div class="bcard-apy">${apy>0?apy.toFixed(2)+'%':cdApy>0?cdApy.toFixed(2)+'%':'—'}</div>
-      <div class="bcard-lbl">${apy>0?'Savings APY':'Best CD APY'}</div>
-    </div>`;
-  }).join('');
-  renderCompTable();
+function setRT(t,btn){
+  rateType=t;
+  // find the second filter-pills group
+  const groups=document.querySelectorAll('#page-rates .filter-pills');
+  if(groups[1]) groups[1].querySelectorAll('.pill').forEach(p=>p.classList.remove('on'));
+  btn.classList.add('on');
+  rateType=t; renderRates();
 }
+function renderRates(){
+  const q=(document.getElementById('rateSearch')?.value||'').toLowerCase();
+  let list=RATES.filter(b=>{
+    if(q&&!b.name.toLowerCase().includes(q)) return false;
+    if(rateType!=='all'&&b.type!==rateType) return false;
+    return true;
+  });
+  if(!q) list=list.filter(b=>(b.apy[rateFilter]||0)>0);
+  list=[...list].sort((a,b)=>(b.apy[rateFilter]||0)-(a.apy[rateFilter]||0));
 
-function toggleBank(name) {
-  if (selectedBanks.includes(name)) selectedBanks = selectedBanks.filter(n=>n!==name);
-  else if (selectedBanks.length < 3) selectedBanks.push(name);
-  renderCompare();
-}
+  const el=document.getElementById('ratesBody');
+  const countEl=document.getElementById('ratesCount');
+  if(countEl) countEl.textContent=`${list.length} bank${list.length!==1?'s':''} found`;
+  if(!el) return;
+  if(!list.length){el.innerHTML=`<div class="no-results">No results.</div>`;return;}
 
-function renderCompTable() {
-  const ct = document.getElementById('comparisonTable');
-  if (selectedBanks.length < 2) { ct.innerHTML = selectedBanks.length===1?'<p style="font-size:13px;color:var(--gray)">Select one more bank to compare.</p>':''; return; }
-  const sel = BANKS.filter(b=>selectedBanks.includes(b.name));
-  const rows = [
-    ['Savings APY',   b => getApy(b,'savings')>0  ? getApy(b,'savings').toFixed(2)+'%'  : 'N/A', true],
-    ['CD APY (1-yr)', b => getApy(b,'cd')>0        ? getApy(b,'cd').toFixed(2)+'%'        : 'N/A', true],
-    ['Checking APY',  b => getApy(b,'checking')>0  ? getApy(b,'checking').toFixed(2)+'%'  : 'N/A', true],
-    ['Money Market',  b => getApy(b,'mma')>0        ? getApy(b,'mma').toFixed(2)+'%'       : 'N/A', true],
-    ['Min. deposit',  b => b.min.savings===0 ? 'None' : '$'+b.min.savings.toLocaleString(), false],
-    ['Monthly fee',   b => (b.fee.savings||0)===0 ? 'None' : '$'+b.fee.savings+'/mo', false],
-    ['Insurance',     b => b.insured, false],
-    ['Account type',  b => b.type==='online'?'Online only':'Branches + online', false],
-    ['Rating',        b => b.rating+' / 5', false],
-  ];
-  ct.innerHTML = `<div class="section-title" style="margin-bottom:12px">Side-by-side comparison</div>
-  <div class="comp-table-wrap">
-    <div class="comp-head">
-      <div class="comp-head-cell">Feature</div>
-      ${sel.map(b=>`<div class="comp-head-cell">${b.name}</div>`).join('')}
-    </div>
-    ${rows.map(([label,fn,hl])=>{
-      const vals=sel.map(fn);
-      const nums=vals.map(v=>parseFloat(v));
-      const best=Math.max(...nums.filter(n=>!isNaN(n)));
-      return`<div class="comp-row">
-        <div class="comp-cell">${label}</div>
-        ${vals.map((v,i)=>`<div class="comp-cell ${hl&&parseFloat(v)===best&&best>0?'comp-best':''}">${v}</div>`).join('')}
-      </div>`;
-    }).join('')}
-  </div>
-  <button class="btn btn-green btn-sm" onclick="aiAnalyze()">Ask AI to analyze these banks →</button>`;
-}
-
-function aiAnalyze() {
-  showPage('ai', document.querySelectorAll('.nav-btn')[3]);
-  document.getElementById('aiInput').value = `Compare ${selectedBanks.join(' vs ')} — which is the best choice and why?`;
-  askAI();
-}
-
-function renderReviews() {
-  document.getElementById('reviewGrid').innerHTML = BANKS.map(b=>`
-    <div class="rev-card" data-bank="${b.name}">
-      <div class="rev-top">
-        <div class="rev-logo" style="background:${b.lc};color:${b.lt}">${b.logo}</div>
+  el.innerHTML=list.map((b,i)=>{
+    const apy=b.apy[rateFilter]||0;
+    const min=b.min[rateFilter]||0;
+    const fee=b.fee[rateFilter]??b.fee.savings??0;
+    const isTop=i<3&&apy>0;
+    const cond=b.cond&&b.cond[rateFilter]?`<div class="rt-cond">${b.cond[rateFilter]}</div>`:'';
+    const apyHtml=apy>0?`<div class="rt-apy ${isTop?'rt-apy-top':''}">${apy.toFixed(2)}%</div>${cond}`:`<div class="rt-na">—</div>`;
+    const ncuaTag=b.insured==='NCUA'?'<span class="tag t-gray" style="padding:1px 6px;font-size:9px">NCUA</span>':'';
+    return`<div class="rt-row" style="${isTop?'background:linear-gradient(90deg,#f0fdf4,transparent)':''}">
+      <div class="rt-bank">
+        <div class="rt-logo">${logoImg(b.domain,b.fb,b.fbg,20)}</div>
         <div>
-          <div class="rev-name">${b.name}</div>
-          <div class="rev-stars">${'★'.repeat(Math.round(b.rating))}${'☆'.repeat(5-Math.round(b.rating))} ${b.rating}/5 · ${b.insured}</div>
+          <div class="rt-name">${b.name}${isTop?' 🏆':''}</div>
+          <div class="rt-meta">${ncuaTag}<span>${b.type==='online'?'Online':'Branches'}</span></div>
         </div>
       </div>
-      <div class="rev-apy">${getApy(b,'savings')>0?getApy(b,'savings').toFixed(2)+'% savings APY':getApy(b,'cd')>0?getApy(b,'cd').toFixed(2)+'% best CD APY':'No savings/CD rate published'}</div>
-      <div class="rev-text">${b.review}</div>
-      ${b.features.map(f=>`<div class="rev-feat">${f}</div>`).join('')}
-    </div>`).join('');
+      <div>${apyHtml}</div>
+      <div style="font-size:12px;color:#4b5563">${min===0?'None':'$'+min.toLocaleString()}</div>
+      <div class="${fee===0?'rt-fee-free':'rt-fee'}">${fee===0?'None':('$'+fee+'/mo')}</div>
+      <div><div class="rt-stars">${'★'.repeat(Math.round(b.rating))}${'☆'.repeat(5-Math.round(b.rating))}</div><div class="rt-rating">${b.rating}/5</div></div>
+      <div>
+        <a href="https://${b.domain}" target="_blank" rel="noopener">
+          <button class="view-btn">Visit →</button>
+        </a>
+      </div>
+    </div>`;
+  }).join('');
 }
 
-function sq(q){document.getElementById('aiInput').value=q;askAI();}
+// ── AI ────────────────────────────────────────────────────────────────────────
+function sq(q){const e=document.getElementById('aiIn');if(e)e.value=q;ask();}
+async function ask(){
+  const q=document.getElementById('aiIn')?.value?.trim();
+  if(!q) return;
+  const out=document.getElementById('aiOut');
+  if(!out) return;
+  out.textContent='Analyzing...'; out.className='ai-out dim';
 
-async function askAI() {
-  const q = document.getElementById('aiInput').value.trim();
-  if (!q) return;
-  const out = document.getElementById('aiResponse');
-  out.textContent = 'Analyzing current rates...';
-  out.className = 'ai-response muted';
-  const bankData = BANKS.map(b=>
-    `${b.name} (${b.type},${b.insured}): savings ${getApy(b,'savings')}%APY, CD ${getApy(b,'cd')||'N/A'}%, checking ${getApy(b,'checking')||0}%, min $${b.min.savings}, fee $${b.fee.savings||0}/mo, rating ${b.rating}/5`
-  ).join('\n');
-  const freshness = dataSource==='live' ? `Rates live-scraped ${scrapedAt?.toLocaleDateString()}.` : 'Using May 2026 baseline rates.';
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-      model:'claude-sonnet-4-20250514',max_tokens:1000,
-      system:`You are a bank advisor on OverExpansion. ${freshness} Fed funds rate 3.50-3.75%. National avg savings APY: ${nationalAvgs.savings_national_avg||0.38}%. Give concise, specific, actionable advice under 220 words. Plain text only — no markdown, no asterisks.\n\nBank data:\n${bankData}`,
+  const rateCtx=RATES.slice(0,12).map(b=>`${b.name}: savings ${b.apy.savings}% APY, CD ${b.apy.cd||'N/A'}%, fee $${b.fee.savings||0}/mo`).join('\n');
+  const bonusCtx=BONUSES.map(b=>`${b.bank}: $${b.bonus} ${b.type} bonus, DD req: ${b.req_dd>0?'$'+b.req_dd:'none'}, no CC: ${b.no_cc}, difficulty: ${b.difficulty}`).join('\n');
+
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      model:'claude-sonnet-4-20250514',max_tokens:800,
+      system:`You are a bank advisor on OverExpansion. Answer questions about bank bonuses, savings rates, and requirements. Be specific, accurate, and under 200 words. Use plain text — no markdown, no asterisks, no bullet symbols.\n\nCurrent rates (May 2026):\n${rateCtx}\n\nCurrent bonuses:\n${bonusCtx}`,
       messages:[{role:'user',content:q}]
     })});
-    const data = await res.json();
-    out.textContent = data.content?.find(c=>c.type==='text')?.text || 'Sorry, no response generated.';
-    out.className = 'ai-response';
-  } catch(e) {
-    out.textContent = 'Unable to connect to AI advisor. Please check your connection.';
-    out.className = 'ai-response';
+    const data=await res.json();
+    out.textContent=data.content?.find(c=>c.type==='text')?.text||'Sorry, no response.';
+    out.className='ai-out';
+  }catch(e){
+    out.textContent='Unable to connect. Please check your connection and try again.';
+    out.className='ai-out';
   }
 }
 
-// ─── BOOT ─────────────────────────────────────────────────────────────────────
-loadRates();
+// ── INIT ──────────────────────────────────────────────────────────────────────
+renderBonuses();
+renderRates();
 </script>
 </body>
 </html>
