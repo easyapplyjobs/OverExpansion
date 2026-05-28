@@ -1,0 +1,41 @@
+{
+  "scraped_at": "2026-05-28T11:36:06.259487+00:00",
+  "national_averages": {
+    "savings_national_avg": 0.38,
+    "mma_national_avg": 0.55,
+    "cd_1yr_national_avg": 1.96,
+    "fdic_report_date": "2025-12-31T00:00:00"
+  },
+  "banks": {
+    "Ally Bank": {
+      "savings": 0.38
+    },
+    "Marcus by Goldman Sachs": {
+      "savings": 4.0
+    },
+    "SoFi Bank": {
+      "savings": 3.1
+    },
+    "Barclays US": {
+      "savings": 3.75
+    }
+  },
+  "errors": [
+    "Discover Bank: no rates extracted",
+    "Synchrony Bank: no rates extracted",
+    "Capital One 360: no rates extracted",
+    "CIT Bank: no rates extracted",
+    "Axos Bank: no rates extracted",
+    "American Express HYSA: no rates extracted",
+    "UFB Direct: no rates extracted",
+    "EverBank: no rates extracted",
+    "Bread Savings: no rates extracted",
+    "Western Alliance Bank: no rates extracted",
+    "Varo Bank: no rates extracted",
+    "Bask Bank: no rates extracted",
+    "LendingClub Bank: no rates extracted",
+    "Forbright Bank: no rates extracted",
+    "Alliant Credit Union: no rates extracted",
+    "Vio Bank: no rates extracted"
+  ]
+}
