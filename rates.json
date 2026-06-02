@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-06-01T13:34:18.277340+00:00",
+  "scraped_at": "2026-06-02T12:02:28.211616+00:00",
   "national_averages": {
     "savings_national_avg": 0.38,
     "mma_national_avg": 0.55,
@@ -18,6 +18,9 @@
     },
     "Barclays US": {
       "savings": 3.75
+    },
+    "LendingClub Bank": {
+      "savings": 4.0
     }
   },
   "errors": [
@@ -33,7 +36,6 @@
     "Western Alliance Bank: no rates extracted",
     "Varo Bank: no rates extracted",
     "Bask Bank: no rates extracted",
-    "LendingClub Bank: no rates extracted",
     "Forbright Bank: no rates extracted",
     "Alliant Credit Union: no rates extracted",
     "Vio Bank: no rates extracted"
