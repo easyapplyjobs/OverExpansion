@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-06-06T10:01:10.933441+00:00",
+  "scraped_at": "2026-06-07T10:26:32.661396+00:00",
   "national_averages": {
     "savings_national_avg": 0.38,
     "mma_national_avg": 0.55,
@@ -10,20 +10,15 @@
     "Ally Bank": {
       "savings": 0.38
     },
-    "Marcus by Goldman Sachs": {
-      "savings": 4.0
-    },
     "SoFi Bank": {
       "savings": 3.1
     },
     "Barclays US": {
       "savings": 3.75
-    },
-    "LendingClub Bank": {
-      "savings": 4.0
     }
   },
   "errors": [
+    "Marcus by Goldman Sachs: no rates extracted",
     "Discover Bank: no rates extracted",
     "Synchrony Bank: no rates extracted",
     "Capital One 360: no rates extracted",
@@ -36,6 +31,7 @@
     "Western Alliance Bank: no rates extracted",
     "Varo Bank: no rates extracted",
     "Bask Bank: no rates extracted",
+    "LendingClub Bank: no rates extracted",
     "Forbright Bank: no rates extracted",
     "Alliant Credit Union: no rates extracted",
     "Vio Bank: no rates extracted"
