@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-06-23T11:13:08.221119+00:00",
+  "scraped_at": "2026-06-24T10:45:58.465461+00:00",
   "national_averages": {
     "savings_national_avg": 0.38,
     "mma_national_avg": 0.55,
@@ -17,7 +17,7 @@
       "savings": 3.1
     },
     "Barclays US": {
-      "savings": 3.75
+      "savings": 3.65
     },
     "LendingClub Bank": {
       "savings": 4.0
