@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-06-30T10:54:16.077477+00:00",
+  "scraped_at": "2026-07-01T11:21:09.036360+00:00",
   "national_averages": {
     "savings_national_avg": 0.38,
     "mma_national_avg": 0.55,
@@ -11,7 +11,7 @@
       "savings": 0.38
     },
     "Marcus by Goldman Sachs": {
-      "savings": 4.0
+      "savings": 1.0
     },
     "SoFi Bank": {
       "savings": 3.1
