@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-08-16T08:24:27.982053+00:00",
+  "scraped_at": "2026-08-17T08:37:58.045505+00:00",
   "national_averages": {
     "savings_national_avg": 0.38,
     "mma_national_avg": 0.55,
@@ -9,6 +9,9 @@
   "banks": {
     "Ally Bank": {
       "savings": 0.38
+    },
+    "Marcus by Goldman Sachs": {
+      "savings": 1.0
     },
     "SoFi Bank": {
       "savings": 3.1
@@ -21,7 +24,6 @@
     }
   },
   "errors": [
-    "Marcus by Goldman Sachs: no rates extracted",
     "Discover Bank: no rates extracted",
     "Synchrony Bank: no rates extracted",
     "Capital One 360: no rates extracted",
