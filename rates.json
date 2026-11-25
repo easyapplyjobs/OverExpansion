@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-11-24T19:17:53.477464+00:00",
+  "scraped_at": "2026-11-25T18:23:18.182865+00:00",
   "national_averages": {
     "savings_national_avg": 0.38,
     "mma_national_avg": 0.55,
@@ -8,7 +8,7 @@
   },
   "banks": {
     "Ally Bank": {
-      "savings": 0.38
+      "savings": 0.39
     },
     "Marcus by Goldman Sachs": {
       "savings": 1.0
@@ -21,6 +21,9 @@
     },
     "LendingClub Bank": {
       "savings": 4.2
+    },
+    "Vio Bank": {
+      "savings": 4.06
     }
   },
   "errors": [
@@ -37,7 +40,6 @@
     "Varo Bank: no rates extracted",
     "Bask Bank: no rates extracted",
     "Forbright Bank: no rates extracted",
-    "Alliant Credit Union: no rates extracted",
-    "Vio Bank: no rates extracted"
+    "Alliant Credit Union: no rates extracted"
   ]
 }
